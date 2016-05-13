@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513100253) do
+ActiveRecord::Schema.define(version: 20160513104809) do
 
   create_table "grupos", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "miembros", force: :cascade do |t|
+    t.integer "musico_id_id"
+    t.integer "grupo_id_id"
+    t.string  "instrumento"
   end
 
   create_table "musicos", force: :cascade do |t|
