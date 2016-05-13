@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513104809) do
+ActiveRecord::Schema.define(version: 20160513105503) do
 
   create_table "grupos", force: :cascade do |t|
     t.string   "name"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20160513104809) do
   end
 
   create_table "miembros", force: :cascade do |t|
-    t.integer "musico_id_id"
-    t.integer "grupo_id_id"
+    t.integer "musico_id"
+    t.integer "grupo_id"
     t.string  "instrumento"
   end
 
