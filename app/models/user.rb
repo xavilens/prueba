@@ -3,23 +3,23 @@ class User < ActiveRecord::Base
   # Con validates campoX uniqueness: {scope: campoY} creamos unicidad en la tupla de campos {campoX, campoY},
   # imposibilitando crear un Usuario con valores repetidos en dicha tupla
   validates :userable_type, presence: true, uniqueness: {scope: :userable_id}
-  
+
   belongs_to :userable, polymorphic: true
 
   def grupo
     if esGrupo?
-      @grupo = Grupo.where(id: userable_id)
+      @grupo = Grupo.where(id: userable_id).first
     end
   end
 
   def musico
     if esMusico?
-      @musico = Musico.where(id: userable_id)
+      @musico = Musico.where(id: userable_id).first
     end
   end
 
   def tipo
-    return userable_type
+    userable_type
   end
 
   private
@@ -32,8 +32,6 @@ class User < ActiveRecord::Base
         musico = Musico.where(id: m.userable_id)
         @musicos.push(musico)
       end
-
-      return @musicos
     end
 
     #Utilizamos self para crear un método de clase. En ausencia de self estaremos creando un método para instancia.
@@ -45,15 +43,13 @@ class User < ActiveRecord::Base
         grupo = Grupo.where(id: g.userable_id)
         @grupos.push(grupo)
       end
-
-      return @grupos
     end
 
     def esMusico?
-      return userable_type=='Musico'
+      userable_type=='Musico'
     end
 
     def esGrupo?
-      return userable_type=='Grupo'
+      userable_type=='Grupo'
     end
 end
