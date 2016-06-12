@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513105503) do
+ActiveRecord::Schema.define(version: 20160612094556) do
+
+  create_table "abcs", force: :cascade do |t|
+    t.integer  "a_id"
+    t.integer  "b_id"
+    t.integer  "c_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "abcs", ["a_id"], name: "index_abcs_on_a_id"
+  add_index "abcs", ["b_id"], name: "index_abcs_on_b_id"
+  add_index "abcs", ["c_id"], name: "index_abcs_on_c_id"
+
+  create_table "as", force: :cascade do |t|
+  end
+
+  create_table "bs", force: :cascade do |t|
+  end
+
+  create_table "cs", force: :cascade do |t|
+  end
 
   create_table "grupos", force: :cascade do |t|
     t.string   "name"

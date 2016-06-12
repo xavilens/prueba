@@ -8,13 +8,13 @@ class User < ActiveRecord::Base
 
   def grupo
     if esGrupo?
-      @grupo = Grupo.where(id: userable_id).first
+      return @grupo = Grupo.where(id: userable_id).first
     end
   end
 
   def musico
     if esMusico?
-      @musico = Musico.where(id: userable_id).first
+      return @musico = Musico.where(id: userable_id).first
     end
   end
 
@@ -26,23 +26,27 @@ class User < ActiveRecord::Base
     #Utilizamos self para crear un método de clase. En ausencia de self estaremos creando un método para instancia.
     def self.musicos
       musicos = User.where(userable_type: 'Musico')
-      @musicos = Array.new
+      @musicos = []
 
       musicos.each do |m|
         musico = Musico.where(id: m.userable_id)
         @musicos.push(musico)
       end
+
+      return @musicos
     end
 
     #Utilizamos self para crear un método de clase. En ausencia de self estaremos creando un método para instancia.
     def self.grupos
       grupos = User.where(userable_type: 'Grupo')
-      @grupos = Array.new
+      @grupos = []
 
       grupos.each do |g|
         grupo = Grupo.where(id: g.userable_id)
         @grupos.push(grupo)
       end
+
+      return @grupos
     end
 
     def esMusico?
